@@ -6,17 +6,19 @@ using namespace std;
 
 int main()
 {
-	int n, x;
+	int n;
+	long long int x;
 	cin >> n;
 	while(n != 0)
 	{
-		vector<int>v;
+		vector<long long>v;
 
 		while(n--)
 		{
 			cin >> x;
 			v.push_back(x);
 		}
+		
 		stack<int>s; 
 		/* push only indices into the stack; 
 		* 1. No need to again search for the index within the input array. index of top element of stack is required to find the area 
@@ -42,9 +44,12 @@ int main()
 
 				if(max_area < tmp_area)
 					max_area = tmp_area;
+
+				cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
 			}
 		}
 
+		cout << "\npopping the remaining elements of the stack:\n\n";
 		while(!s.empty())
 		{
 			int top = s.top();
@@ -58,6 +63,9 @@ int main()
 
 			if(max_area < tmp_area)
 				max_area = tmp_area;
+
+			cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
+			i = top;
 		}
 
 		cout << max_area << "\n";

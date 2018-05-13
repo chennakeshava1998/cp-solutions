@@ -50,6 +50,7 @@ int main()
 		}
 
 		// cout << "\npopping the remaining elements of the stack:\n\n";
+
 		while(!s.empty())
 		{
 			int top = s.top();
@@ -65,12 +66,13 @@ int main()
 				max_area = tmp_area;
 
 			// cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
-			i = top;
+			// i = top;
 		}
 
 		cout << max_area << "\n";
 
 		cin >> n;
+		v.clear();
 	}
 
 	return 0;

@@ -18,7 +18,7 @@ int main()
 			cin >> x;
 			v.push_back(x);
 		}
-		
+
 		stack<int>s; 
 		/* push only indices into the stack; 
 		* 1. No need to again search for the index within the input array. index of top element of stack is required to find the area 
@@ -29,7 +29,7 @@ int main()
 		// use l instead of v.size(), not much of gains here anyway, because v.size() takes constant time. 
 		while(i < l)
 		{
-			if(s.empty() || s.top() < v[i])
+			if(s.empty() || v[s.top()] < v[i]) // v[s.top()] not pnly s.top() =====> Silly mistake, we are pushing indices. 
 				s.push(i++); // push i and later increment it! (i gets incremented only at this point.)
 			else
 			{
@@ -45,11 +45,11 @@ int main()
 				if(max_area < tmp_area)
 					max_area = tmp_area;
 
-				cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
+				// cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
 			}
 		}
 
-		cout << "\npopping the remaining elements of the stack:\n\n";
+		// cout << "\npopping the remaining elements of the stack:\n\n";
 		while(!s.empty())
 		{
 			int top = s.top();
@@ -64,7 +64,7 @@ int main()
 			if(max_area < tmp_area)
 				max_area = tmp_area;
 
-			cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
+			// cout << "tmp_area = " << tmp_area << " i = " << i << "\n";
 			i = top;
 		}
 

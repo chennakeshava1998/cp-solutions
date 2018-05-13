@@ -1,6 +1,6 @@
     // problem - http://www.spoj.com/problems/HISTOGRA/
     // explanation - https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
-     
+    // IMP: Keep all the decimal-datatypes as long long int, to be on the safer side 
     #include<bits/stdc++.h>
     using namespace std;
      

@@ -1,3 +1,6 @@
+// uses max-suffix array preprocessing.
+// can also be solved after sorting(retaining the original index), and then using this preprocessing.
+// This is an O(n) solution.
 #include<bits/stdc++.h>
 using namespace std;
 

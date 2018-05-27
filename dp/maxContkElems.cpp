@@ -1,4 +1,7 @@
-// Kadane's Algorithm - https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/#include<bits/stdc++.h>
+// https://www.geeksforgeeks.org/largest-sum-subarray-least-k-numbers/
+// This uses prefixArray to quickly compute the sum of last k-elements. 
+// But, **sliding window** can also be used to achieve the same, but it uses O(1) space, but this uses O(n) extra space.
+// Asymptotically, prefixArray doesn't make a difference, because the solution is anyway O(n) in space.
 #include<bits/stdc++.h>
 using namespace std;
 

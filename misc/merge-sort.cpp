@@ -1,6 +1,10 @@
 /*
 void mergeArrays(int arr1[], int arr2[], int m, int n);
-You are given the above function declaration. Assume arr1 and arr2 are two sorted arrays with m integers, and n integers respectively.  Also assume, that arr1 has the capacity to hold (m + n) integers. Create the function which stores the contents of arr1 and arr2 in arr1 in sorted order, with O(1) space and O(m + n) time complexity. No need to return arr1, just store the values in arr1.
+You are given the above function declaration. Assume arr1 and arr2 are two sorted arrays with m integers, 
+and n integers respectively.  Also assume, that arr1 has the capacity to hold (m + n) integers. 
+Create the function which stores the contents of arr1 and arr2 in arr1 in sorted order, 
+with O(1) space and O(m + n) time complexity. No need to return arr1, just store the values in arr1.
+
 Example:
 Input arrays:
 arr1 = 1, 2, 3, 6, 8, 9, -, -, -

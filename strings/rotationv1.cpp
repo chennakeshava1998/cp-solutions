@@ -29,55 +29,48 @@ Function returns FALSE as the words are permutations of each other but not rotat
 #include<bits/stdc++.h>
 using namespace std;
 
-bool check(char *a, char *b);
+bool check(string a, string b);
 
 int main()
 {
-	char *a, *b;
-	
-	// trouble in input of strings.
-	scanf ("%s", a);
-
-	// the second string is not being input. When printed, null is seen and hence seg-fault is caused.
-	fflush(stdin);
-	scanf ("%s", b);
-
-	printf("%s %s\n", a, b);
+	string a, b;
+	cin >> a >> b;
 
 	cout << check(a, b) << "\n";
 
 	return 0;
 }
 
-bool check(char *a, char *b)
+bool check(string a, string b)
 {
 	 
 /*
 	instead of using the below loop to search for a substring,
 	it's more appropriate to use the built-in C function strstr
+	Check rotationv1.cpp
 */
 
 	// Decl in string.h: char* strstr(const char *haystack, const char *needle);
 	// FUNFACT: strcasestr() does the same thing, IGNORING the case-sensitivity
 
-	strcat(b, b);
-	void *ptr = strstr(b, a); // Time complexity of strstr: O(len(a) + len(b))
-
-	return (ptr == NULL ? 0 : 1);
 
 
-/*
 	b = b + b;
 	int l = a.size(), i = 0;
-	while(i < l) 
-	{
-		// time complecity of substr is linear in the length of the returned object
-		if(a == b.substr(i, l))
-			return 1;
-		++i;
-	}
+	
+	char str1[a.size()+1];
 
-	return 0; 
-*/
+	for(i=0;i<l;++i)
+		str1[i] = a[i];
+	str1[i] = '\0';
 
+	l = b.size();
+	char str2[l+1];
+
+	for(i=0;i<l;++i)
+		str2[i] = b[i];
+	str2[i] = '\0';
+
+	void *ptr = strstr(str2, str1);
+	return ptr == NULL ? 0 : 1; 
 }

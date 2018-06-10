@@ -21,6 +21,7 @@ bool inOrder(Node *root);
 bool inOrder(Node *root)
 {
     // empty trees are considered as bst
+    // to prevent de referencing of NULL nodes:
     if (root == NULL)
         return 1;
 

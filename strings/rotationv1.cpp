@@ -53,7 +53,13 @@ bool check(string a, string b)
 	// Decl in string.h: char* strstr(const char *haystack, const char *needle);
 	// FUNFACT: strcasestr() does the same thing, IGNORING the case-sensitivity
 
+	/*
+		IMP: Without checking for length, 
+		str1 = abc, atr2 = abcd; will give an output of True.
+	*/
 
+	if(a.size() != b.size())
+		return 0;
 
 	b = b + b;
 	int l = a.size(), i = 0;

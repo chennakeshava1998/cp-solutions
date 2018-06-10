@@ -15,25 +15,13 @@ bool check_bst(Node *root);
 
 
 // Condition for BST: left <= root < right
-bool check_bst(Node *root)
-{
-	if(root == NULL)
-		return true;
 
-	if(root->left != NULL && root->left->val > root->val)
-		return false;
-
-	if(root->right != NULL && root->right->val <= root->val)
-		return false;
-
-	return (check_bst(root->left) && check_bst(root->right));
-}
 
 */
 
 
 
-// Approach-2: Perform preorder traversal and check if the final sequence is sorted
+// Approach-2: Perform inOrder traversal and check if the final sequence is sorted
 // Some alternatives in this method still cause Segmentation Fault: Lines: 76 and 88
 
 struct Node
@@ -44,19 +32,19 @@ struct Node
 
 
 bool isBST(Node* root);
-void preOrder(Node *root, vector<int>&v);
+void inOrder(Node *root, vector<int>&v);
 
 
-void preOrder(Node *root, vector<int>&v)
+void inOrder(Node *root, vector<int>&v)
 {
 	if(root == NULL)
 		return;
 
-	preOrder(root->left, v);
+	inOrder(root->left, v);
 
 	v.push_back(root->data);
 
-	preOrder(root->right, v);	
+	inOrder(root->right, v);	
 }
 
 
@@ -64,7 +52,7 @@ void preOrder(Node *root, vector<int>&v)
 bool isBST(Node* root) {
 	vector<int>v;
 	int i;
-	preOrder(root, v);
+	inOrder(root, v);
     
     vector<int>a(v.size());
 

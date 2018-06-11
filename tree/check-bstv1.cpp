@@ -1,18 +1,3 @@
-/*
-Not working for test-case:
-
-Input:
-4
-20 10 L 10 5 L 5 2 L 2 3 R
-
-Its Correct output is:
-1
-
-And Your Code's output is:
-0
-
-*/
-
 // previous value, encountered during the inorder traversal
 int prev_inorder_val = -1;
 bool isBST(Node *root);

@@ -11,9 +11,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void disp(vector<vector<int>> dp);
+
 int main()
 {
-    int m, n, x, i, j;
+    int m, n, x, i, j, temp;
 
     cin >> m >> n;
     int v[m + 1][n + 1];
@@ -37,16 +39,81 @@ int main()
     i = m;
     for (j = n - 1; j >= 1; --j)
     {
-        if (i < n - 1)
+        temp = 1e9;
+        if (i <= m - 1)
             temp = dp[i + 1][j];
-        if (j < m - 1)
+        if (j <= n - 1)
             temp = min(temp, dp[i][j + 1]);
 
         dp[i][j] = temp - v[i][j];
 
         if (v[i][j] < 0 && dp[i][j] < 1 - v[i][j])
             dp[i][j] = 1 - v[i][j];
+
+        if (dp[i][j] < 0 && v[i][j] > 0)
+            dp[i][j] = 0;
+        else if (dp[i][j] < 0)
+            dp[i][j] = 1;
     }
 
+    // Traversing the last column: King only moves downwards
+    j = n;
+    for (i = m - 1; i >= 1; --i)
+    {
+        temp = 1e9;
+        if (i <= m - 1)
+            temp = dp[i + 1][j];
+        if (j <= n - 1)
+            temp = min(temp, dp[i][j + 1]);
+
+        dp[i][j] = temp - v[i][j];
+
+        if (v[i][j] < 0 && dp[i][j] < 1 - v[i][j])
+            dp[i][j] = 1 - v[i][j];
+
+        if (dp[i][j] < 0 && v[i][j] > 0)
+            dp[i][j] = 0;
+        else if (dp[i][j] < 0)
+            dp[i][j] = 1;
+    }
+
+    // Now traverse from m-1, n-1: covering complete rows in one iteration
+
+    for (i = m - 1; i >= 1; --i)
+    {
+        for (j = n - 1; j >= 1; --j)
+        {
+            temp = 1e9;
+            if (i <= m - 1)
+                temp = dp[i + 1][j];
+            if (j <= n - 1)
+                temp = min(temp, dp[i][j + 1]);
+
+            dp[i][j] = temp - v[i][j];
+
+            if (v[i][j] < 0 && dp[i][j] < 1 - v[i][j])
+                dp[i][j] = 1 - v[i][j];
+
+            if (dp[i][j] < 0 && v[i][j] > 0)
+                dp[i][j] = 0;
+            else if (dp[i][j] < 0)
+                dp[i][j] = 1;
+        }
+    }
+
+    disp(dp);
+
+    cout << "Final Answer: " << dp[1][1] << endl;
+
     return 0;
+}
+
+void disp(vector<vector<int>> dp)
+{
+    for (int i = 1; i < dp.size(); ++i)
+    {
+        for (int j = 1; j < dp[0].size(); ++j)
+            cout << dp[i][j] << " ";
+        cout << endl;
+    }
 }

@@ -11,6 +11,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// helper function to display the contents of dp 2d array
 void disp(vector<vector<int>> dp);
 
 int main()
@@ -18,7 +19,13 @@ int main()
     int m, n, x, i, j, temp;
 
     cin >> m >> n;
+    // m = no. of rows in the grid.
+    // n = no. of columns in the grid.
+
+    // v array contains the input grid
     int v[m + 1][n + 1];
+
+    // If the king is dropped at (i, j), what is the minimum health required for him to reach (m, n) ?? This value is held by dp[i][j]
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 
     for (i = 1; i <= m; ++i)
@@ -27,6 +34,8 @@ int main()
             cin >> v[i][j];
     }
 
+    // If the v(m, n) < 0, then if the king is dropped at (m, n), then he must have atleast one greater point than v(m, n) to survive.
+    // Assuming the health of king >= 1 always
     if (v[m][n] < 0)
         dp[m][n] = 1 - v[m][n];
     else if (v[m][n] == 0)
@@ -34,8 +43,11 @@ int main()
     else
         dp[m][n] = 0;
 
-    // finding dp for the last row; King only moves rightwards.
+    // To fill dp[i][j], we need dp values from the right and bottom cells. This mandates a diagonal bottom-left to upward-right movement like: (m, n), (m, n-1), (m-1, n), (m-2, n-2), (m-1, n-1), etc
 
+    // I couldn't think of an elegant way for this traversal. So I thought of filling up the last row and column first. Then filling up row-wise/col-wise from the pen-ultimate row/column respectively.
+
+    // finding dp for the last row; King only moves rightwards.
     i = m;
     for (j = n - 1; j >= 1; --j)
     {
@@ -110,10 +122,12 @@ int main()
 
 void disp(vector<vector<int>> dp)
 {
+    cout << "\n\nContents of dp array:\n";
     for (int i = 1; i < dp.size(); ++i)
     {
         for (int j = 1; j < dp[0].size(); ++j)
             cout << dp[i][j] << " ";
         cout << endl;
     }
+    cout << "\n\n";
 }

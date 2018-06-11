@@ -1,2 +1,5 @@
 # ignore all C-compiled object files
 a.out
+
+# Settings related to Visual Studio
+.vscode

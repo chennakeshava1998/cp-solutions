@@ -46,5 +46,8 @@ bool inOrder(Node *root)
 
 bool isBST(Node *root)
 {
+    prev_inorder_val = -1;
+    // the above stmt ensures that all test cases start afresh.
+    // Without the above stmt, the previous inorder values will be carried over to the successive test cases! 
     return inOrder(root);
 }

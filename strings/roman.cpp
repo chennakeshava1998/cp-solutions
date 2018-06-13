@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+Not sure how to use enum. This can eliminate the ugly if-else construct in the last loop.
+
 enum roman_nums
 {
     I = 1,
@@ -11,7 +14,7 @@ enum roman_nums
     D = 500,
     M = 1000
 };
-
+*/
 int main()
 {
     string roman;

@@ -1,16 +1,24 @@
 int Solution::reverse(int A)
 {
-    string temp = to_string(A);
-    std::reverse(temp.begin(), temp.end());
-    stringstream ss(temp);
-    int x = 0;
-    ss >> x;
+    int temp = A, ans = 0, rem;
 
     if (A < 0)
-        x = -x;
+        temp = -temp;
 
-    if (x >= (1 << 32) || x < -(1 << 32))
-        x = 0;
+    while (temp)
+    {
+        rem = temp % 10;
+        if (ans * 10 > INT_MAX)
+            return 0;
 
-    return x;
+        ans = ans * 10;
+
+        if (ans + rem > INT_MAX)
+            return 0;
+
+        ans += rem;
+        temp /= 10;
+    }
+
+    return (A < 0) ? -ans : ans;
 }

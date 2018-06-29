@@ -1,6 +1,6 @@
 int Solution::reverse(int A)
 {
-    int temp = A, ans = 0, rem;
+    int temp = A, ans = 0, prev = ans, rem;
 
     if (A < 0)
         temp = -temp;
@@ -12,13 +12,19 @@ int Solution::reverse(int A)
             return 0;
 
         ans = ans * 10;
+        if (ans < prev)
+            return 0;
 
         if (ans + rem > INT_MAX)
             return 0;
 
         ans += rem;
+
+        if (ans < prev)
+            return 0;
+        
         temp /= 10;
     }
 
-    return (A < 0) ? -ans : ans;
+    return (A < 0) ? (-1 * ans) : ans;
 }

@@ -5,12 +5,18 @@ double Solution::findMedianSortedArrays(const vector<int> &A, const vector<int> 
 {
     int m = A.size(), n = B.size(), l = 0, r = INT_MAX, k = (m + n) / 2, cnt;
     double mid, ans1, ans2;
-    while (l <= r)
+    while (l < r) // Do not include equality, might go into an infinte loop
     {
         mid = l + (r - l) / 2;
+        cnt = 0;
+        auto p = lower_bound(A.begin(), A.end(), mid);
 
-        cnt = lower_bound(A.begin(), A.end(), mid) - A.begin();
-        cnt += lower_bound(B.begin(), B.end(), mid) - B.begin();
+        if (p != A.end())
+            cnt = p - A.begin();
+
+        p = lower_bound(B.begin(), B.end(), mid);
+        if (p != B.end())
+            cnt += p - B.begin();
 
         if (cnt < k)
         {
@@ -40,11 +46,20 @@ double Solution::findMedianSortedArrays(const vector<int> &A, const vector<int> 
 
     // If total number of elements are even, take the average of (m + n)/2'th and ((m + n)/2 - 1) 'th element
     --k;
+
     int candidate1 = *(lower_bound(A.begin(), A.end(), ans1) - 1);
     int candidate2 = *(lower_bound(B.begin(), B.end(), ans1) - 1);
 
-    cnt = lower_bound(A.begin(), A.end(), candidate1) - A.begin();
-    cnt += lower_bound(B.begin(), B.end(), candidate1) - B.begin();
+    cnt = 0;
+
+    auto p = lower_bound(A.begin(), A.end(), candidate1);
+    if (p != A.end())
+        cnt = p - A.begin();
+
+    p = lower_bound(B.begin(), B.end(), candidate1);
+
+    if (p != B.end())
+        cnt += p - B.begin();
 
     if (cnt == k)
         return (candidate1 + ans1) / 2;

@@ -4,7 +4,27 @@
 #include <string>
 using namespace std;
 
-// vector<string> splitString(string s);
+vector<string> v;
+
+void splitString(string s);
+void splitString(string s)
+{
+    string temp;
+    for (int i = 0; i < s.size(); ++i)
+    {
+        int j = i;
+        temp.clear();
+        while (s[j] != ' ' && j < s.size())
+        {
+            temp += s[j];
+            ++j;
+        }
+
+        v.push_back(temp);
+        i = j;
+    }
+}
+
 bool checkHard(string s);
 bool checkHard(string s)
 {
@@ -52,7 +72,11 @@ int findHardness(vector<string> v)
 
 int main()
 {
-    vector<string> v = {"abcd", "of", "eee"};
+    string s;
+    // cin >> s; Does not work, can not input sentences with spaces.
+    // The program won't compile if newline is specified as "\n"!!
+    getline(cin, s, '\n');
+    splitString(s);
     cout << findHardness(v) << endl;
 
     return 0;

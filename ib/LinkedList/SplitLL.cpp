@@ -4,6 +4,12 @@
     For example,
     Given 1->4->3->2->5->2 and x = 3,
     return 1->2->2->4->3->5.
+
+    O(N) Time Complexity
+    O(N) Space Complexity
+    This can also be done with constant space and quadratic time-complexity
+
+    split is the main function, the rest are helper functions.
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -38,6 +44,10 @@ struct Node *insert(int val)
     p->next = NULL;
     return p;
 }
+
+/*
+Traverse the LL and store the two categories of nodes in the same order they appear. Then append the values of lesser and greater values consecutively into the LL. 
+*/
 
 struct Node *split(struct Node *HEAD, int x)
 {

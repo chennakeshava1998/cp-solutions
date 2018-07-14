@@ -2,14 +2,9 @@
 
 bool comp(const string &a, const string &b)
 {
-    string A = a, B = b;
-    if (A.size() == B.size())
-        return A < B;
+    string x = a + b, y = b + a;
 
-    if (A.size() < B.size())
-        return B[A.size() - 1] < B[A.size()];
-    else
-        return A[B.size() - 1] < A[B.size()];
+    return x < y;
 }
 
 string Solution::largestNumber(const vector<int> &A)
@@ -29,6 +24,16 @@ string Solution::largestNumber(const vector<int> &A)
 
     for (auto u : v)
         ans += u;
+
+    // removing leading zeros in ans
+    i = 0;
+    // while (ans[i] != 0) ====> Comparison with a char is required. This stmt is true for all non-NULL characters.
+
+    while (ans[i] == '0')
+        ans.erase(i);
+
+    if (ans.empty())
+        ans += "0";
 
     return ans;
 }

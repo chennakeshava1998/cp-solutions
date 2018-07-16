@@ -1,12 +1,16 @@
 // https://www.interviewbit.com/problems/ways-to-form-max-heap/
 #include <cmath>
 #define MOD ((int)pow(10, 9) + 7)
+
+vector<vector<int>> dp(pow(10, 3) + 1, vector<int>(pow(10, 3) + 1, -1));
+
 long long int nchoosek(long long int n, long long int k);
 long long int numMaxHeap(long long int n);
 
 int Solution::solve(int n)
 {
-    if (n <= 2)
+
+    if (n <= 1)
         return 1;
 
     long long int h = log2(n); // height of the tree
@@ -23,7 +27,9 @@ int Solution::solve(int n)
     if (p >= m / 2) // Is left subtree full?
         L = (1 << h) - 1;
     else
-        L = (1 << h) - 1 - (m / 2 - p);
+        L = (1 << (h - 1)) - 1 + p;
+
+    // L = min(p, m / 2) + (1 << (h - 1)) - 1;
 
     R = (n - 1) - L;
 
@@ -31,7 +37,10 @@ int Solution::solve(int n)
     long long int b = solve(L) % MOD;
     long long int c = solve(R) % MOD;
 
-    return (int)(((a * b) % MOD) * c) % MOD;
+    long long int ans = (a * b) % MOD;
+    ans = (ans * c) % MOD;
+
+    return ans;
 }
 
 long long int nchoosek(long long int n, long long int k)
@@ -45,13 +54,13 @@ long long int nchoosek(long long int n, long long int k)
     if (k > (n - k))
         k = n - k;
 
-    long long int ans = 1;
-    for (long long int i = 1; i <= k; ++i)
-    {
-        ans = ((ans % MOD) * (n - i + 1) % MOD) % MOD;
-        ans %= MOD;
-        ans /= i;
-    }
+    if (dp[n][k] != -1)
+        return dp[n][k];
 
-    return ans % MOD;
+    long long int ans = (nchoosek(n - 1, k) % MOD + nchoosek(n - 1, k - 1) % MOD) % MOD;
+
+    dp[n][k] = ans % MOD;
+    dp[n][n - k] = ans % MOD;
+
+    return dp[n][k];
 }

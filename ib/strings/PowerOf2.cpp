@@ -5,11 +5,17 @@ using namespace std;
 
 bool odd, carry; // True, if the div is odd
 
-int func(string A);
+string func(string A);
 string divide(string div);
 
-int func(string A)
+string func(string A)
 {
+    char m = A[A.size()-10];
+    if((m-48)&1 && A!="1") // last bit is odd, so it cannot be a power of 2
+    {
+        odd=1;
+        return "";
+    }
 
    
 }

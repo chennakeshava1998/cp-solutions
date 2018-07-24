@@ -1,4 +1,4 @@
-
+/*
 int profit(vector<int> v)
 {
     vector<int> dp(v.size(), 0);
@@ -15,6 +15,20 @@ int profit(vector<int> v)
         max_dp = max(max_dp, dp[i]);
     }
     return dp[0];
+}
+*/
+
+int profit(vector<int> v)
+{
+    int ans = 0;
+
+    for (int i = 0; i < v.size() - 1; ++i)
+    {
+        if (v[i + 1] > v[i])
+            ans += (v[i + 1] - v[i]);
+    }
+
+    return ans;
 }
 
 int Solution::maxProfit(const vector<int> &A)

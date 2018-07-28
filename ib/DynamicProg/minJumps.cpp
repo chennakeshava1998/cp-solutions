@@ -46,24 +46,32 @@ int minJumps(vector<int> &A)
     if (A.empty())
         return 0;
 
-    int steps = 1, maxi = INT_MIN, n = A.size();
+    int steps = 1, maxi = 0, n = A.size();
 
     for (int i = 0; i < n; ++i)
     {
-        maxi = INT_MIN;
-        int j = i + 1, k = A[i], pos = 0;
+        maxi = A[i] + i;
+        int j = i + 1, k = A[i];
         while ((k--) && j < A.size())
         {
-            if (maxi < A[j])
+            if (maxi < A[j] + j)
             {
-                maxi = A[j];
-                pos = j;
+                maxi = A[j] + j;
+                ++steps;
             }
             ++j;
+
+            if (maxi >= (n - 1))
+                break;
         }
 
-        ++steps;
-        i = pos + A[pos] - 1;
+        i = j - 1;
+
+        if (maxi >= (n - 1))
+            break;
+
+        // ++steps;
+        // i = pos + A[pos] - 1;
     }
 
     return steps;
